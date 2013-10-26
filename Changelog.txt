@@ -1,0 +1,141 @@
+October 21, 2013
+v0.9 (Benson the Park Manager)
+-Upgraded to XHTML standards.
+
+
+October 21, 2013
+v0.8.2 (Angelica Santamerano) polished
+-Columns with links to functionalities are no longer sortable.
+-Added a new table for Select A Room, View Rooms List and other similar tables.
+
+October 18, 2013
+v0.8.1 (Angelica Santamerano) polished
+-Added a cleaner table for View Payment Records and Official Lodgers.
+-Added a method that removes official lodgers from the record.
+-Added a method that edits the lodgers' rooms, monthly rates and appliance rates.
+-Payment Records table is now sorted by date.
+-After recording payment, user is now redirected to payment records.
+-Fixed errors on lodger reservation.
+-All live search methods are deprecated.
+
+October 16, 2013
+v0.8 (Angelica Santamerano) polished
+-Confirming reservation added. Still sets the appliance rate to 0.00 instead of redirecting to editpaymentrecords.php
+-Broke down the header into multiple parts.
+-Official lodger's info can be updated (in case of change of payment rates and rooms in the middle of the semester, for example)
+
+October 12, 2013
+v0.7 (Maria la del Barrio) beta
+-Enabled adding payments.
+-Balance attribute is now derived from payment records.
+
+October 11, 2013
+v0.6 (Marimar) beta
+-A link that leads to a page where a lodger's personal data can be edited is now on the View Lodgers Table.
+-Adding a new lodger can now include profile pictures! Profile pictures are optional; a shadow figure replaces it in case if there are no profile pics.
+-Replaced automated datepicker with dropdown menus for dates.
+-Added a function that enables to delete a vacant room.
+-Fixed an error when adding a new room; syntax error on query fixed.
+-Redirection time for adding a new room changed from 5 seconds to 1.5 seconds.
+-DATABASE: Added a blank column on the lodger table. This can allow uploading pictures.
+-SECURITY: Re-enabled!
+
+October 10, 2013
+v0.5 (Rosalinda) beta
+-Eliminated redundancy on the Select A Room code.
+-Redirect time reduced to 2 from 5 upon creating a new lodger data.
+-Fixed the view lodgers page.
+-Fixed Image Not Found error upon searching a lodger in the view lodgers page.
+
+October 9, 2013
+v0.4 (Camilla) alpha
+-Slowly ported functionalities from Codeigniter to manual approach. The guides on the net are overwhelming.
+-SECURITY: Temporarily disabled.
+
+October 8, 2013
+v0.3 (Alicia) alpha
+-Scrapped some functions that are unused.
+-Cleaned up the View Room Info. The list of reserved lodgers now use the new table instead of the old one.
+-Fixed errors in reservation deleting function.
+-Fixed query errors. The new queries malfunction by themselves.
+-Fixed an error in the unofficial lodgers list of "Edit Lodger Personal Info" when the reserved customers are included in the tabs.
+-INCODE: Placed all the javascript functions in separate files.
+-DATABASE: Reservations now have date of reservation for FCFS basis. [Thanks to Sir Daniel for this info]
+-DATABASE: Scrapped the following database tables due to redundancy and difficulty in implementation:
+ -rescust
+ -resrooms
+
+October 4, 2013
+v0.2 (Betty La Fea) alpha 2
+-Added AJAX live search on viewing list of official and unofficial lodgers.
+-Added dropdowns on the functionalities stated above for search criteria.
+-Added a login page based on MY.IIT's login page.
+-Added a margin to the table to make it look nice.
+-Fixed an error in the "View Room Info" page that shows the maximum number of available beds.
+-Added a placeholder page for "View Payment Records."
+-Added a checklist on "Enter Necessary Fees" to check lodger's appliances.
+-UI: Removed container background. Too distracting.
+
+October 3, 2013
+v0.2 (Betty La Fea) alpha
+-Fixed the error on adding a Partial payment.
+-Adjusted the Add Room and Edit Room methods so that the landlord will no longer enter the description manually and the number of occupants can be selected via dropdown menu.
+-Made the room max bedspaces fixed. Vacancy is now a derived attribute.
+-The list of rooms when adding a new lodger is no longer gender-sensitive. This is to allow 2 relatives of different genders, for example, to occupy the same room.
+-Added tabs to toggle on view and edit official/unofficial lodgers.
+-SECURITY: Only implemented on the index page. Planned to be added on other sensitive pages soon.
+-SECURITY: Added account type on users list.
+-DATABASE: Flushed the old entries to avoid clutter.
+-DATABASE: Null attributes on rooms are no longer allowed.
+-NAMING CONVENTIONS: Each version starting from this has its "alias" similar to how Ubuntu nicknames their versions.
+
+September 18, 2013
+v0.1 alpha 5
+-Added a third type of payment (Balance settlement).
+-Fixed an error in the search function of the reserve customer listing where searching for a reserved customer returns the whole table.
+
+September 17, 2013
+v0.1 alpha 4
+-Changed the dropdown of the Payments and Balances module (no functionality yet).
+-Renamed "City" to "City/Municipality."
+-Added something that shows who logged in, right near the logout button.
+-Enabled function "Add Payment" of module "Payments and Balances!"
+-Added a checkbox on Add Payment functionality to set if penalty is included in the payment.
+-SECURITY: Some functionalities don't show for non-admins (example: landlord's employees). Currently buggy at the moment.
+-DATABASE: Added account type for both admin and non-admins.
+-DATABASE: Added payment type on payment table.
+
+September 16, 2013
+v0.1 alpha 3
+-After updating any lodger's personal info, the user is now redirected to the "edit lodger personal info" module.
+-Fixed reserving customer having wrong SSN and room code causing the data unable to be stored.
+-Fixed a bug that does not decrement bedspace when adding a new reservation.
+-Added a function that enables the landlord to delete/cancel a reservation.
+-Added a function that displays a list of customers who have reserved a certain room.
+-Added system security.
+-Renamed "Payments" to "Balances and Payments." (no functionality yet)
+-Added a menu that views lodgers with balances (no functionality yet).
+-Added "Balance" to view lodger info.
+-Fixed placeholder on search functions from both official and unofficial lodgers lists.
+-Fixed login page.
+-Added browser detection. System is currently not working on IE.
+-DATABASE: Added "balance" to lodger table.
+
+September 13, 2013
+v0.1 alpha 2
+-Added search function on unofficial lodgers list.
+-Fixed a bug on adding reservations where the user is prompted to search for a lodger's last name.
+-Added search function on customer reservations list.
+
+September 9, 2013
+-Added search function on official lodgers list.
+-Adding a new lodger makes the said lodger official. After info is stored in the database, a list of rooms will display, depending on the lodger's gender. The landlord now has an option to add a room to the new lodger.
+
+September 2, 2013
+v0.1 alpha
+-Changed wallpaper and added CSS.
+-Fixed some bugs on Reservation module.
+
+August 2013
+v0.0
+Initial coding with most modules

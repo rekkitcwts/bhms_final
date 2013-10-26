@@ -1,0 +1,70 @@
+Migrate all functionalities:
+STATUS OF FUNCTIONALITIES
+-Lodger
+-Add [Finished][Migrated]
+-Edit [Polished]
+-Unofficial Listing [Polished][Migrated]
+-Official Listing [Finished][Migrated]
+-Add unofficial lodger to official listing [Finished][Migrated]
+-Remove official lodger from official listing [Finished]
+-View Profile[Finished]
+
+
+-Room
+-Add [Finished][Migrated]
+-Edit [Polished]
+-View Room [Finished][Migrated]
+-View Room Details [Finished]
+-Delete Room [Finished]
+
+-Reservation
+-Add reservation (a redirect from add lodger) [in progress]
+-Reserved Lodgers and Room [Polished][Migrated]
+-Extend Deadline [Not done]
+-Confirm Reservation [Finished]
+-Delete Reservation [Finished]
+
+-Payments
+-Add
+ -Full Payment [Polished]
+ -Partial Payment [Polished]
+-Edit [Polished]
+-View lodgers with balances [Not done]
+-View Payment Records: [Polished, all records are shown instead of searching.]
+ -By month [Not done]
+ -By semester [Not done]
+ -By year [Not done]
+
+Ranking is (from H to L): finished, polished, beta, alpha.
+
+TODO:
+-Make official:
+ -Appliances Checklist for appliance rate. [DONE, But not complete.]
+
+-Reservation Module:
+ -change the "set deadline" form. [DONE]
+ -NEW BUG! Duplicate Entry detected! Newly added reserve customer has wrong SSN! [FIXED]
+ -Searching for a reserved customer with blank name as parameter does not display the whole table![REPLACED with a livesearch method]
+
+-Edit Unofficial Lodger Info
+ -After unofficial lodger info updates, the user is redirected to the official lodgers list.[DONE]
+ -Options to choose between official and unofficial lodgers had buggy buttons. [Replaced with tabs]
+
+-Redo all insert queries.
+
+-Payment module: [FIXED]
+ -If the payment type is full, proceed as normal.
+ -If the payment type is partial:
+  -Get the room rate. 
+  -Subtract amount from room rate.
+  -Add the difference to lodger's balance.
+
+-Rooms
+ -Keep max occupants intact. [DONE]
+ -Use COUNT() to list number of occupants and reserved customers. [DONE]
+
+-Security
+ -Prevent SQL injections
+
+-Make Official (List of rooms) [DONE]
+ -a href=makeofficial.php?ssn=X&roomcode=Y
