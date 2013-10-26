@@ -34,48 +34,33 @@ if(($functionality != "addlodger") && ($functionality != "makeofficial") && ($fu
 }
 else
 {
-  ?>
 
-  		<div id="RLtable" style="width: 850px;"></div>
-	<script type="text/javascript">
+$query = "SELECT * FROM room";
 
-		$(document).ready(function () {
-			
-		    //Prepare jTable
-			$('#RLtable').jtable({
-				
-				title: 'Rooms Listing',
-				paging: true,
-				pageSize: 10,
-				sorting: true,
-				defaultSorting: 'roomcode ASC',
-				actions: {
-					listAction: 'selroombackend.php?action=list',
-				//	createAction: 'roombackend.php?action=create',
-				//	updateAction: 'roombackend.php?action=update',
-				//	deleteAction: 'roombackend.php?action=delete'
-				},
-				fields: {
-					roomcode: {
-						key: true,
-						title: 'Room Number',
-						width: '20%',
-						create: false,
-						edit: false,
-						list: true
-					}
-				}
-			});
-
-			//Load person list from server
-			$('#RLtable').jtable('load');
-
-			
-		});
-
-	</script>
-<br>
-<?php
+//echo $query;
+$result = mysqli_query($dbc,$query);
+if($result){
+	
+    if(mysqli_affected_rows($dbc)!=0){
+	echo '<table border="0" cellpadding="0" cellspacing="0" class="mytable boxshadow" width="920">';
+	echo '<tr bgcolor="#0000FF"><th>Room</th><th>Description</th><th>Room Type</th><th>Room has CR?</th><th>Maximum Bedspaces</th></tr>';
+         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
+		 {
+			 $hasCR = "";
+			 if ($row['hasCR'] == 0) $hasCR = "No";
+			 else $hasCR = "Yes";
+			echo '<tr><td>'.$row['roomcode'].'</td><td>'.$row['roomdesc'].'</td><td>'.$row['roomtype'].'</td><td>'.$hasCR.'</td><td>'.$row['maxspace'].'</td></tr>';
+		 }
+	echo '</table>';
+    }else {
+       // echo 'No Results for :"'.$_GET['keyword'].'"';
+	   echo '<img border="0" width="490" alt="Record not found!." title="Record not found!" src=' . '"img/WITW-BHMS/record-not-found-wenhern.png" style="border:1px solid #ccc; ">';
+			echo '<br>';
+			echo '<span class="boxshadow" style="background:#fff">';
+			echo 'No data.';
+			echo '</span>';
+    }
+  
+}
 }
 	require_once("template/footer.php");
-?>
