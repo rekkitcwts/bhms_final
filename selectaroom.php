@@ -35,7 +35,10 @@ if(($functionality != "addlodger") && ($functionality != "makeofficial") && ($fu
 else
 {
 
-$query = "SELECT * FROM room";
+$query = "SELECT room . * , bedspace.monthlyrate
+FROM room, bedspace, room_bedspace
+WHERE bedspace.bedspace_id = room_bedspace.bedspace_id
+AND room.roomcode = room_bedspace.roomcode";
 
 //echo $query;
 $result = mysqli_query($dbc,$query);
@@ -43,13 +46,13 @@ if($result){
 	
     if(mysqli_affected_rows($dbc)!=0){
 	echo '<table border="0" cellpadding="0" cellspacing="0" class="mytable boxshadow" width="920">';
-	echo '<tr bgcolor="#0000FF"><th>Room</th><th>Description</th><th>Room Type</th><th>Room has CR?</th><th>Maximum Bedspaces</th></tr>';
+	echo '<tr bgcolor="#0000FF"><th>Room</th><th>Description</th><th>Room Type</th><th>Room has CR?</th><th>Maximum Bedspaces</th><th>Monthly Room Rate</th></tr>';
          while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
 		 {
 			 $hasCR = "";
 			 if ($row['hasCR'] == 0) $hasCR = "No";
 			 else $hasCR = "Yes";
-			echo '<tr><td>'.$row['roomcode'].'</td><td>'.$row['roomdesc'].'</td><td>'.$row['roomtype'].'</td><td>'.$hasCR.'</td><td>'.$row['maxspace'].'</td></tr>';
+			echo '<tr><td>'.$row['roomcode'].'</td><td>'.$row['roomdesc'].'</td><td>'.$row['roomtype'].'</td><td>'.$hasCR.'</td><td>'.$row['maxspace'].'</td><td>'.$row['monthlyrate'].'</tr>';
 		 }
 	echo '</table>';
     }else {
