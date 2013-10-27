@@ -21,11 +21,11 @@ require_once('template/content-top.php');
 </td></tr>
 <tr><td>Room Type</td><td>
 <select name="roomtype">
-      <option value="Female">Female</option>
-	  <option value="Male">Male</option>
+      <option value="F">Female</option>
+	  <option value="M">Male</option>
 </select></td></tr>
 <tr><td>Total Bedspaces</td><td>
-<select name="remain_bedspace">
+<select name="maxspace">
       <option value="1">1</option>
 	  <option value="2">2</option>
 	  <option value="3">3</option>
@@ -41,7 +41,22 @@ require_once('template/content-top.php');
       <option value="1">Yes</option>
 	  <option value="0">No</option>
 </select></td></tr>
-<tr><td>Room Rate</td><td>Autogenerate Dropdown Here</td></tr>
+<tr><td>Room Rate</td><td>
+<?php
+mysql_connect('localhost', 'bhms', 'regularshow');
+mysql_select_db('bhms');
+
+$sql = "SELECT * FROM bedspace";
+$result = mysql_query($sql);
+
+echo "<select name=\"bedspace_id\">";
+while ($row = mysql_fetch_array($result)) {
+    echo "<option value='" . $row['bedspace_id'] . "'>" . $row['monthlyrate'] . "</option>";
+}
+echo "</select>";
+mysql_close();
+?>
+</td></tr>
 </tbody>
 </table>
 <div class='actions'>

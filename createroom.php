@@ -3,10 +3,10 @@ include_once ('database_connection.php');
 
 $roomcode = $_POST['roomcode'];
 $roomtype = $_POST['roomtype'];
-$roomrate = $_POST['roomrate'];
 // Get number of beds of this room...
-$numberbeds = $_POST['remain_bedspace'];
-$isroomwithCR = $_POST['isroomwithCR'];
+$numberbeds = $_POST['maxspace'];
+$hasCR = $_POST['hasCR'];
+$bedspace_id = $_POST['bedspace_id'];
 
 if(empty($roomcode))
 {
@@ -26,17 +26,19 @@ else
 			$roomdesc = 'Room for ' . $numberbeds . ' persons';
 		}
 		
-		
-		$query = "INSERT INTO room (roomcode, roomdesc, roomtype, roomrate, remain_bedspace, isroomwithCR) VALUES ('$roomcode', '$roomdesc', '$roomtype', '$roomrate', '$numberbeds', '$isroomwithCR')";
-		mysqli_query($dbc, $query)
+		$roomquery = "INSERT INTO room (roomcode, roomdesc, roomtype, maxspace, hasCR) VALUES ('$roomcode', '$roomdesc', '$roomtype', '$numberbeds', '$hasCR')";
+		mysqli_query($dbc, $roomquery)
+			or die('Error querying database.');
+			
+		$occroom = "INSERT INTO room_bedspace (roomcode, bedspace_id) VALUES ('$roomcode','$bedspace_id')";
+		mysqli_query($dbc, $occroom)
 			or die('Error querying database.');
 			
 		echo 'Room info added.<br>';
 		echo 'Room number: ' . $roomcode . '<br>';
 		echo 'Details: ' . $roomdesc . '<br>';
 		echo 'Type: ' . $roomtype . '<br>';
-		echo 'Room rate: ' . $roomrate . '<br>';
-		if ($isroomwithCR == 1)
+		if ($hasCR == 1)
 		echo 'Has CR: Yes<br>';
 		else
 		echo 'Has CR: No<br>';
