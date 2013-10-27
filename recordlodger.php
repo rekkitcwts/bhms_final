@@ -3,6 +3,7 @@ $page_title = "Enter necessary fees";
 require_once('template/header.php');
 require_once('template/navmenu.php');
 require_once('template/content-top.php');
+
 ?>
 <script type="text/javascript">
 			$(document).ready(function() {
@@ -47,7 +48,7 @@ require_once('template/content-top.php');
 
 <form action="addtoroom.php" method="post" accept-charset="utf-8">
 	<input type="hidden" name="lodger_ssn" value="<?php echo $_GET['ssn'] ?>" >
-	<input type="hidden" name="room_code" value="<?php echo $_GET['roomcode'] ?>" >
+	<input type="hidden" name="rb_id" value="<?php echo $_GET['rb_id'] ?>" >
 	
 	<table border="0" class="mytable" cellpadding="0" cellspacing="0" >
 		<tbody>
@@ -72,7 +73,6 @@ require_once('template/content-top.php');
 			</td>
 			</tr>
 			<tr><td>Appliance Rate</td><td><input type="text" id="appliancerate" name="appliancerate" value=""></td></tr>
-			<tr><td>Base Room Rate</td><td><input type="text" name="monthlybal" value="<?php echo $_GET['roomrate'] ?>"></td></tr>
 		</tbody>
 	</table>
 

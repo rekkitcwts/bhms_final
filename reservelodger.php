@@ -5,14 +5,14 @@ require_once('template/header.php');
 require_once('template/navmenu.php');
 require_once('template/content-top.php');
 $ssn = $_GET['ssn'];
-$roomcode = $_GET['roomcode'];
+$rb_id = $_GET['rb_id'];
 ?>
 <form action="createres.php" method="post" accept-charset="utf-8">
 	<table border="0" class="mytable" cellpadding="0" cellspacing="0">
 		<tbody>
 			<tr><th colspan="3">Set the deadline.</th></tr>
 			<input type="hidden" name="ssn" value="<?php echo $ssn; ?>" >
-			<input type="hidden" name="roomcode" value="<?php echo $roomcode; ?>" >
+			<input type="hidden" name="rb_id" value="<?php echo $rb_id; ?>" >
 			<tr><td>Deadline date</td>
 <td>
 <select name="deadlineYear" >

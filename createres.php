@@ -4,10 +4,11 @@ $deadlinedate=date_create();
 date_date_set($deadlinedate,$_POST['deadlineYear'],$_POST['deadlineMonth'],$_POST['deadlineDay']);
 $deadlinedateString = date_format($deadlinedate,"Y-m-d");
 $ssn = $_POST['ssn'];
-$roomcode = $_POST['roomcode'];
+$rb_id = $_POST['rb_id'];
+$currentDate = date("Y-m-d");
 
 
-$insertPayment = "INSERT INTO reservation (lodger_ssn, roomcode, resdate, resdeadline) VALUES ('$ssn','$roomcode',NOW(),'$deadlinedateString')";
+$insertPayment = "INSERT INTO reservation (ssn, rb_id, resDate, resDeadline) VALUES ('$ssn','$rb_id','$currentDate','$deadlinedateString')";
 mysqli_query($dbc, $insertPayment)
 	or die('Error querying database.');
 			
