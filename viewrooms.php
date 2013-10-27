@@ -93,8 +93,8 @@ else {
 				actions: {
 					listAction: 'roombackend.php?action=list',
 				//	createAction: 'roombackend.php?action=create',
-					updateAction: 'roombackend.php?action=update',
-					deleteAction: 'roombackend.php?action=delete'
+				//	updateAction: 'roombackend.php?action=update',
+				//	deleteAction: 'roombackend.php?action=delete'
 				},
 				fields: {
 					roomcode: {

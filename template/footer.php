@@ -24,8 +24,8 @@ Good. You are using the correct browser.
 </html>-->
 </div>
 <div class="c3" id="footer">Boarding House Management System<br />
-Version 0.9 (Benson the Park Manager) polished<br />
-Last Release: 20-OCT-2013</div>
+Version 1.0 (Regular Show vs. Maria Mercedes)<br />
+Last Release: 27-OCT-2013</div>
 </div>
 </body>
 </html>

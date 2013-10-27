@@ -51,7 +51,7 @@ require_once('imguploadConstraints.php');
 				$target = BHMS_UPLOADPATH . $picture;
 				if (move_uploaded_file($_FILES['picture']['tmp_name'], $target)) 
 				{
-					$query = "INSERT INTO lodger (lname, fname, mname, gender, balance, birthdate, startStay, province, city, barangay, purok, affiliation, denomination, contactnum, picture) VALUES ('$lname', '$fname', '$mname', '$gender', '$balance', '$birthdate', '$startlodge', '$province', '$city', '$barangay', '$purok', '$religion', '$denomination', '$contactnum', '$picture')";
+					$query = "INSERT INTO lodger (lname, fname, mname, gender, birthdate, startStay, province, city, barangay, purok, affiliation, denomination, contactnum, picture) VALUES ('$lname', '$fname', '$mname', '$gender', '$birthdate', '$startlodge', '$province', '$city', '$barangay', '$purok', '$religion', '$denomination', '$contactnum', '$picture')";
 					mysqli_query($dbc, $query)
 						or die('Error querying database.');
 					$ssnquery = "Select lodger.ssn from lodger where lodger.lname = '$lname' AND lodger.fname = '$fname' and lodger.mname = '$mname'";

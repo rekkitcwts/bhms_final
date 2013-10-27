@@ -6,7 +6,10 @@ require_once('template/content-top.php');
 include_once ('database_connection.php');
 $roomcode = $_GET['roomcode'];
 
-$roomQuery = "SELECT * FROM room WHERE roomcode = '$roomcode'";
+$roomQuery = "SELECT room . * , bedspace.monthlyrate
+FROM room, bedspace, room_bedspace
+WHERE bedspace.bedspace_id = room_bedspace.bedspace_id
+AND room.roomcode = room_bedspace.roomcode AND room_bedspace.roomcode = '$roomcode'";
 
 $occupantsQuery = "SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, official.room_code FROM official, lodger WHERE lodger.ssn = official.lodger_ssn AND official.room_code = '$roomcode' ORDER BY lodger.lname";
 $reslodgersQuery = "SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, reservation.roomcode, reservation.resdeadline FROM reservation, lodger WHERE lodger.ssn = reservation.lodger_ssn AND reservation.roomcode = '$roomcode' ORDER BY lodger.lname";
@@ -34,12 +37,12 @@ if($roomResult){
 			echo '<tr><td>Room Code</td><td>' . $roomcode .'</td></tr>';
 			echo '<tr><td>Description</td><td>' . $room['roomdesc'] .'</td></tr>';
 			echo '<tr><td>Room Type</td><td>' . $room['roomtype'] .'</td></tr>';
-			echo '<tr><td>Rate per Bedspacer</td><td>' . $room['roomrate'] .'</td></tr>';
-			echo '<tr><td>Total Bedspaces</td><td>' . $room['remain_bedspace'] .'</td></tr>';
-			$freespace = ($room['remain_bedspace']  - $numOL) - $numRL;
+			echo '<tr><td>Rate per Bedspacer</td><td>P' . $room['monthlyrate'] .'</td></tr>';
+			echo '<tr><td>Total Bedspaces</td><td>' . $room['maxspace'] .'</td></tr>';
+			$freespace = ($room['maxspace']  - $numOL) - $numRL;
 			echo '<tr><td>Free Bedspaces</td><td>' . $freespace .'</td></tr>';
 			echo '<tr><td>Has CR?</td>';
-			if ($room['isroomwithCR'] == 0)
+			if ($room['hasCR'] == 0)
 				echo '<td>No</td>';
 			else
 				echo '<td>Yes</td>';

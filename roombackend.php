@@ -16,7 +16,7 @@ try
 		$recordCount = $row['RecordCount'];
 		 
 		//Get records from database
-		$roomlistquery = "SELECT room . * , bedspace.monthlyrate
+		$roomlistquery = "SELECT room_bedspace.rb_id, room.* , bedspace.*
 FROM room, bedspace, room_bedspace
 WHERE bedspace.bedspace_id = room_bedspace.bedspace_id
 AND room.roomcode = room_bedspace.roomcode ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";";
@@ -41,7 +41,7 @@ AND room.roomcode = room_bedspace.roomcode ORDER BY " . $_GET["jtSorting"] . " L
 			$freespace = $row['maxspace'];
 		//	echo '<tr><td>'.$row['roomcode'].'</td><td>' . $row['roomdesc'] .'</td><td>' . $row['roomtype'] .'</td><td>' . $row['roomrate'] .'</td><td>' . $freespace . '/' . $row['remain_bedspace'] .'</td>';
 			
-			$rows[] = array('roomcode' => $row['roomcode'], 'roomdesc' => $row['roomdesc'], 'roomtype' => $row['roomtype'], 'roomrate' => $row['monthlyrate'], 'freespace' => $freespace, 'remain_bedspace' => $row['maxspace'], 'isroomwithCR' => $row['hasCR']);
+			$rows[] = array('rb_id'=>$row['rb_id'],'roomcode' => $row['roomcode'], 'roomdesc' => $row['roomdesc'], 'roomtype' => $row['roomtype'], 'roomrate' => $row['monthlyrate'], 'freespace' => $freespace, 'remain_bedspace' => $row['maxspace'], 'isroomwithCR' => $row['hasCR']);
 		}
 
 		//Return result to jTable
