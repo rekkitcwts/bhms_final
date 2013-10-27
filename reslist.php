@@ -34,8 +34,13 @@ require_once('template/content-top.php');
 					deleteAction: 'rl.php?action=delete'
 				},
 				fields: {
-					ssn: {
+					res_id: {
 						key: true,
+						edit: false,
+						create: false,
+						list: false
+					},
+					ssn: {
 						create: false,
 						edit: false,
 						list: false
@@ -71,15 +76,16 @@ require_once('template/content-top.php');
 						create: false,
 						edit: false
 					},
-					resdate: {
+					resDate: {
 						title: 'Date of Reservation',
 						width: '20%',
 						create: false,
 						edit: false
 					},
-					resdeadline: {
+					resDeadline: {
 						title: 'Reservation Deadline',
 						width: '20%',
+						edit: true,
 						create: false
 					},
 					makeofficial: {
@@ -90,7 +96,7 @@ require_once('template/content-top.php');
 						sorting: false, //This column is not sortable!
 						display: function(data)
 						{
-							return '<a title="Confirm Reservation." href="confirmres.php?ssn=' + data.record.ssn + '&roomcode=' + data.record.roomcode + '" ><img src="./img/icons/bhms_confirm_res.png" width="16" height="16"  alt="Confirm Reservation"></img></a>'
+							return '<a title="Confirm Reservation." href="confirmres.php?ssn=' + data.record.ssn + '&rb_id=' + data.record.rb_id + '" ><img src="./img/icons/bhms_confirm_res.png" width="16" height="16"  alt="Confirm Reservation"></img></a>'
 						}
 					},
 					viewprofile: {

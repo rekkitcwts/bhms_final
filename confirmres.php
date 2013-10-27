@@ -18,17 +18,13 @@ include_once ('database_connection.php');
   {
   
 		$ssn = $_GET['ssn'];
-		$roomcode = $_GET['roomcode'];
-		$roomquery = "SELECT * from room where roomcode = '$roomcode'";
-		$roomdata = mysqli_query($dbc, $roomquery);
-		$rowdata = mysqli_fetch_array($roomdata,MYSQLI_ASSOC);
-		$monthlybal = $rowdata['roomrate'];
+		$rb_id = $_GET['rb_id'];
 		// add lodger to official listing
-		$confirmLodgerQuery = "INSERT INTO official (lodger_ssn, room_code, appliancerate, monthlybal) VALUES ('$ssn', '$roomcode', '0.00', '$monthlybal')";
+		$confirmLodgerQuery = "INSERT INTO occupy_room (ssn, rb_id) VALUES ('$ssn', '$rb_id')";
 		// and delete the info for the reservation
 		mysqli_query($dbc, $confirmLodgerQuery)
 			or die('Error querying database.');	
-		$delquery = "DELETE FROM reservation WHERE lodger_ssn = '$ssn'";
+		$delquery = "DELETE FROM reservation WHERE ssn = '$ssn' LIMIT 1";
 		mysqli_query($dbc, $delquery) or die('Error querying database.');
 			
 		echo 'Reservation confirmed. Redirecting to system homepage...';

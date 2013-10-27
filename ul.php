@@ -2,13 +2,13 @@
 include_once ('database_connection.php');
 try
 {
-	$con = mysql_connect("localhost","kureido","tnx4standinstillwanker");
-	mysql_select_db("kureido", $con);
+	$con = mysql_connect("localhost","bhms","regularshow");
+	mysql_select_db("bhms", $con);
 	//Getting records (listAction)
 	if($_GET["action"] == "list")
 	{
 		//Get record count
-		$offresult = mysql_query("SELECT COUNT(*) AS OLRecordCount FROM official;");
+		$offresult = mysql_query("SELECT COUNT(*) AS OLRecordCount FROM occupy_room;");
 		$offrow = mysql_fetch_array($offresult);
 		$allresult = mysql_query("SELECT COUNT(*) AS AllRecordCount FROM lodger;");
 		$allrow = mysql_fetch_array($allresult);
@@ -17,7 +17,18 @@ try
 		$recordCount = $allrow['AllRecordCount'] - $offrow['OLRecordCount'] - $resrow['ResRecordCount'];
 
 		//Get records from database
-		$result = mysql_query("SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, lodger.gender from lodger where lodger.ssn not in (SELECT lodger.ssn FROM lodger, official WHERE lodger.ssn = official.lodger_ssn UNION (SELECT lodger.ssn FROM lodger, reservation WHERE lodger.ssn = reservation.lodger_ssn)) ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
+		$result = mysql_query("SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, lodger.gender FROM lodger WHERE lodger.ssn NOT IN (
+	SELECT lodger.ssn
+	FROM lodger 
+	INNER JOIN occupy_room ON occupy_room.ssn = lodger.ssn 
+	INNER JOIN room_bedspace ON room_bedspace.rb_id = occupy_room.rb_id 
+	INNER JOIN bedspace ON bedspace.bedspace_id = room_bedspace.bedspace_id UNION (
+		SELECT lodger.ssn
+		FROM lodger
+		INNER JOIN reservation USING (ssn)
+		INNER JOIN room_bedspace USING (rb_id)
+	)
+) ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
 		
 		//Add all records to an array
 		$rows = array();

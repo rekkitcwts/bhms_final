@@ -4,22 +4,23 @@ require_once('template/header.php');
 require_once('template/navmenu.php');
 require_once('template/content-top.php');
 include_once ('database_connection.php');
-$roomcode = $_GET['roomcode'];
+$rb_id = $_GET['rb_id'];
 
-$roomQuery = "SELECT room . * , bedspace.monthlyrate
+$roomQuery = "SELECT room . * , bedspace.*
 FROM room, bedspace, room_bedspace
 WHERE bedspace.bedspace_id = room_bedspace.bedspace_id
-AND room.roomcode = room_bedspace.roomcode AND room_bedspace.roomcode = '$roomcode'";
+AND room.roomcode = room_bedspace.roomcode AND room_bedspace.rb_id = '$rb_id'";
 
-$occupantsQuery = "SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, official.room_code FROM official, lodger WHERE lodger.ssn = official.lodger_ssn AND official.room_code = '$roomcode' ORDER BY lodger.lname";
-$reslodgersQuery = "SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, reservation.roomcode, reservation.resdeadline FROM reservation, lodger WHERE lodger.ssn = reservation.lodger_ssn AND reservation.roomcode = '$roomcode' ORDER BY lodger.lname";
+$occupantsQuery = "SELECT occupy_room.official_rec_id , lodger.lname, lodger.fname, lodger.mname FROM occupy_room INNER JOIN lodger ON lodger.ssn = occupy_room.ssn WHERE occupy_room.rb_id = '$rb_id' ORDER BY lodger.lname";
 
-$countOLquery = "SELECT count(lodger_ssn) AS occnum FROM official WHERE room_code = '$roomcode'";
+$reslodgersQuery = "SELECT reservation.res_id , lodger.lname, lodger.fname, lodger.mname, reservation.resDate, reservation.resDeadline FROM reservation INNER JOIN lodger ON lodger.ssn = reservation.ssn AND reservation.rb_id = '$rb_id' ORDER BY lodger.lname";
+
+$countOLquery = "SELECT count(official_rec_id) AS occnum FROM occupy_room WHERE rb_id = '$rb_id'";
 $OLresult = mysqli_query($dbc,$countOLquery);
 $OLrow = mysqli_fetch_array($OLresult,MYSQLI_ASSOC);
 $numOL = $OLrow['occnum'];
 				
-$countRLquery = "SELECT count(lodger_ssn) AS resnum FROM reservation WHERE roomcode = '$roomcode'";
+$countRLquery = "SELECT count(res_id) AS resnum FROM reservation WHERE rb_id = '$rb_id'";
 $RLresult = mysqli_query($dbc,$countRLquery);
 $RLrow = mysqli_fetch_array($RLresult,MYSQLI_ASSOC);
 $numRL = $RLrow['resnum'];
@@ -34,7 +35,7 @@ if($roomResult){
 	echo '<tr bgcolor="#66cc44"><th>Details</th><th></th></tr>';
          while($room = mysqli_fetch_array($roomResult,MYSQLI_ASSOC))
 		 {
-			echo '<tr><td>Room Code</td><td>' . $roomcode .'</td></tr>';
+			echo '<tr><td>Room Code</td><td>' . $room['roomcode'] .'</td></tr>';
 			echo '<tr><td>Description</td><td>' . $room['roomdesc'] .'</td></tr>';
 			echo '<tr><td>Room Type</td><td>' . $room['roomtype'] .'</td></tr>';
 			echo '<tr><td>Rate per Bedspacer</td><td>P' . $room['monthlyrate'] .'</td></tr>';
@@ -94,7 +95,7 @@ if($resResult)
 	if($resMSAR!=0){
 		while($res = mysqli_fetch_array($resResult,MYSQLI_ASSOC))
 		{
-			echo '<tr><td>' . $res['lname'].', '.$res['fname']. ' '.$res['mname'].'</td><td>'.$res['resdeadline'].'</td></tr>';
+			echo '<tr><td>' . $res['lname'].', '.$res['fname']. ' '.$res['mname'].'</td><td>'.$res['resDeadline'].'</td></tr>';
 		}
 	}
 	else

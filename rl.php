@@ -2,8 +2,8 @@
 include_once ('database_connection.php');
 try
 {
-	$con = mysql_connect("localhost","kureido","tnx4standinstillwanker");
-	mysql_select_db("kureido", $con);
+	$con = mysql_connect("localhost","bhms","regularshow");
+	mysql_select_db("bhms", $con);
 	//Getting records (listAction)
 	if($_GET["action"] == "list")
 	{
@@ -13,7 +13,10 @@ try
 		$recordCount = $resrow['ResRecordCount'];
 
 		//Get records from database
-		$result = mysql_query("SELECT lodger.ssn, lodger.lname, lodger.fname, lodger.mname, lodger.gender, reservation.roomcode, reservation.resdate, reservation.resdeadline FROM lodger, reservation WHERE lodger.ssn = reservation.lodger_ssn ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
+		$result = mysql_query("SELECT reservation.res_id, lodger.ssn, reservation.rb_id, reservation.resDate, reservation.resDeadline, lodger.gender, lodger.lname, lodger.fname, lodger.mname, room_bedspace.roomcode
+FROM lodger
+INNER JOIN reservation USING (ssn)
+INNER JOIN room_bedspace USING (rb_id) ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
 		
 		//Add all records to an array
 		$rows = array();
@@ -49,7 +52,7 @@ try
 	else if($_GET["action"] == "update")
 	{
 		//Update record in database
-		$result = mysql_query("UPDATE reservation SET resdeadline = '" . $_POST["resdeadline"] . "' WHERE lodger_ssn = " . $_POST["ssn"] . ";");
+		$result = mysql_query("UPDATE reservation SET resDeadline = '" . $_POST["resDeadline"] . "' WHERE res_id = " . $_POST["res_id"] . ";");
 
 		//Return result to jTable
 		$jTableResult = array();
@@ -60,7 +63,7 @@ try
 	else if($_GET["action"] == "delete")
 	{
 		//Delete from database
-		$result = mysql_query("DELETE FROM reservation WHERE lodger_ssn = " . $_POST["ssn"] . ";");
+		$result = mysql_query("DELETE FROM reservation WHERE res_id = " . $_POST["res_id"] . ";");
 
 		//Return result to jTable
 		$jTableResult = array();

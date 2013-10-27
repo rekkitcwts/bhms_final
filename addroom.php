@@ -24,10 +24,6 @@ require_once('template/content-top.php');
       <option value="Female">Female</option>
 	  <option value="Male">Male</option>
 </select></td></tr>
-<tr><td>Rate per head</td><td>
-<div class="field">
-<input type="text" class="required" name="roomrate" value="">
-</div></td></tr>
 <tr><td>Total Bedspaces</td><td>
 <select name="remain_bedspace">
       <option value="1">1</option>
@@ -41,10 +37,11 @@ require_once('template/content-top.php');
 </select>
 </td></tr>
 <tr><td>Room has CR?</td><td>
-<select name="isroomwithCR">
+<select name="hasCR">
       <option value="1">Yes</option>
 	  <option value="0">No</option>
 </select></td></tr>
+<tr><td>Room Rate</td><td>Autogenerate Dropdown Here</td></tr>
 </tbody>
 </table>
 <div class='actions'>

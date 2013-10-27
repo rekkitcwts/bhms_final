@@ -11,8 +11,8 @@ $type = $_GET['type'];
 
 $balquery = "SELECT SUM(totalrate - paymentamt) as totalbalance FROM payment WHERE lodger_ssn = '$ssn'";
 $balresult = mysqli_query($dbc,$balquery);
-$balrow = mysqli_fetch_array($balresult,MYSQLI_ASSOC);
-$numbal = $balrow['totalbalance'];
+//$balrow = mysqli_fetch_array($balresult,MYSQLI_ASSOC);
+//$numbal = $balrow['totalbalance'];
 
 $query = "SELECT * from lodger WHERE ssn = '$ssn'";
 
@@ -43,11 +43,11 @@ if($result)
 			echo '<tr><td>Status</td><td>' . $type .'</td></tr>';
 			echo '<tr><td>Gender</td><td>' . $row['gender'].'</td></tr>';
 			echo '<tr><td>Date of Birth</td><td>' . $row['birthdate'] .'</td></tr>';
-			echo '<tr><td>Start of Stay</td><td>' . $row['startlodge'] .'</td></tr>';
+			echo '<tr><td>Start of Stay</td><td>' . $row['startStay'] .'</td></tr>';
 			echo '<tr><td>Home Address</td><td>' . $row['purok'] . ', ' . $row['barangay'] . ', ' . $row['city'] . ', ' . $row['province'] . '</td></tr>';
-			echo '<tr><td>Religious Affiliation</td><td>' . $row['religion'] . ' (' . $row['denomination'] . ')' .'</td></tr>';
+			echo '<tr><td>Religious Affiliation</td><td>' . $row['affiliation'] . ' (' . $row['denomination'] . ')' .'</td></tr>';
 			echo '<tr><td>Contact Number</td><td>' . $row['contactnum'] .'</td></tr>';
-			echo '<tr><td>Balance</td><td>' . 'P' . $numbal .'</td></tr>';
+			echo '<tr><td>Balance</td><td>' . 'P' /*. $numbal*/ .'</td></tr>';
 		 }
 	echo '</table>';
 	}

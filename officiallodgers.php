@@ -49,11 +49,16 @@ require_once('template/content-top.php');
 					viewAction: 'viewlodgerprofile.php'
 				},
 				fields: {
-					ssn: {
+					official_rec_id: {
 						key: true,
 						create: false,
 						edit: false,
 						list: false
+					},
+					ssn: {
+						list: false,
+						create: false,
+						edit: false
 					},
 					lname: {
 						title: 'Last Name',
@@ -74,15 +79,15 @@ require_once('template/content-top.php');
 						create: false,
 						edit: false
 					},
-					room_code: {
-						title: 'Room',
-						width: '20%'
-					},
-					appliancerate: {
+					applianceRate: {
 						title: 'Appliance Rate',
 						width: '25%'
 					},
-					monthlybal: {
+					roomcode: {
+						title: 'Room',
+						width: '20%'
+					},
+					monthlyrate: {
 						title: 'Room Rate',
 						width: '25%'
 					},

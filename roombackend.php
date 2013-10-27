@@ -28,17 +28,19 @@ AND room.roomcode = room_bedspace.roomcode ORDER BY " . $_GET["jtSorting"] . " L
 		{
 		   
 			
-			$roomcode = $row['roomcode'];
-			$countOLquery = "SELECT count(lodger_ssn) AS occnum FROM official WHERE room_code = '$roomcode'";
+			$rb_id = $row['rb_id'];
+			// Number of official lodgers
+			$countOLquery = "SELECT count(official_rec_id) AS occnum FROM occupy_room WHERE rb_id = '$rb_id'";
 			$OLresult = mysqli_query($dbc,$countOLquery);
-//			$OLrow = mysqli_fetch_array($OLresult,MYSQLI_ASSOC);
-//			$numOL = $OLrow['occnum'];
-			$countRLquery = "SELECT count(lodger_ssn) AS resnum FROM reservation WHERE roomcode = '$roomcode'";
+			$OLrow = mysqli_fetch_array($OLresult,MYSQLI_ASSOC);
+			$numOL = $OLrow['occnum'];
+			
+			// Number of reserved lodgers
+			$countRLquery = "SELECT count(res_id) AS resnum FROM reservation WHERE rb_id = '$rb_id'";
 			$RLresult = mysqli_query($dbc,$countRLquery);
-//			$RLrow = mysqli_fetch_array($RLresult,MYSQLI_ASSOC);
-//			$numRL = $RLrow['resnum'];
-//			$freespace = ($row['maxspace'] - $numOL) - $numRL;
-			$freespace = $row['maxspace'];
+			$RLrow = mysqli_fetch_array($RLresult,MYSQLI_ASSOC);
+			$numRL = $RLrow['resnum'];
+			$freespace = ($row['maxspace'] - $numOL) - $numRL;
 		//	echo '<tr><td>'.$row['roomcode'].'</td><td>' . $row['roomdesc'] .'</td><td>' . $row['roomtype'] .'</td><td>' . $row['roomrate'] .'</td><td>' . $freespace . '/' . $row['remain_bedspace'] .'</td>';
 			
 			$rows[] = array('rb_id'=>$row['rb_id'],'roomcode' => $row['roomcode'], 'roomdesc' => $row['roomdesc'], 'roomtype' => $row['roomtype'], 'roomrate' => $row['monthlyrate'], 'freespace' => $freespace, 'remain_bedspace' => $row['maxspace'], 'isroomwithCR' => $row['hasCR']);
@@ -50,6 +52,8 @@ AND room.roomcode = room_bedspace.roomcode ORDER BY " . $_GET["jtSorting"] . " L
 		$jTableResult['TotalRecordCount'] = $recordCount;
 		$jTableResult['Records'] = $rows;
 		print json_encode($jTableResult);
+		
+		mysql_close();
 	}
 	//Creating a new record (createAction)
 	else if($_GET["action"] == "create")

@@ -3,6 +3,7 @@ v1.0 (Regular Show vs. Maria Mercedes)
 -Normalized the database.
 -Fixed an error in adding a lodger then making the lodger an official lodger.
 -Updated the method for adding a new reservation.
+-Fixed the method for confirming and deleting a reservation.
 -DDL included in the repository
 
 October 21, 2013
