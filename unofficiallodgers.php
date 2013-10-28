@@ -80,6 +80,16 @@ require_once('template/content-top.php');
 							return '<a title="Make this lodger an official lodger." href="selectaroom.php?ref=makeofficial&ssn=' + data.record.ssn + '" ><img src="./img/icons/bhms_make_official.png" width="16" height="16" alt="Make official"></img></a>'
 						}
 					},
+					addulreservation: {
+						title: 'Add Room Reservation',
+						width: '10%',
+						edit: false,
+						sorting: false, //This column is not sortable!
+						display: function(data)
+						{
+							return '<a title="Reserve a room for this unofficial lodger." href="selectaroom.php?ref=addulreservation&ssn=' + data.record.ssn + '" ><img src="./img/icons/bhms_reserve_icon.png" width="16" height="16" alt="Reserve a room for this unofficial lodger"></img></a>'
+						}
+					},
 					viewprofile: {
 					
 						title: 'View Profile',

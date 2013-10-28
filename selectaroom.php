@@ -1,7 +1,7 @@
 <?php
 $functionality = $_GET['ref'];
 
-if(($functionality != "addlodger") && ($functionality != "makeofficial") && ($functionality != "editrooms"))
+if(($functionality != "addlodger") && ($functionality != "makeofficial") && ($functionality != "addulreservation"))
 {
 $page_title = "Access Denied";
 }
@@ -17,7 +17,7 @@ include_once ('database_connection.php');
 $roomQuery = "SELECT * from room";
 // this determines what functionalities should the last column echo
 
-if(($functionality != "addlodger") && ($functionality != "makeofficial") && ($functionality != "editrooms"))
+if(($functionality != "addlodger") && ($functionality != "makeofficial") && ($functionality != "addulreservation"))
 {
 	echo 'You don\'t have permission to access this page.';
 	echo '<br>';
@@ -136,6 +136,8 @@ else
 					},
 					<?php
 					}
+					if ($functionality != "addulreservation")
+					{
 					?>
 					addtoroom: {
 					
@@ -156,9 +158,10 @@ else
 								return '<a href="recordlodger.php?ssn=' + <?php echo $_GET['ssn'] ?> + '&rb_id=' + data.record.rb_id  + '"\><img src="./img/icons/bhms_add_lodger.png" width="16" height="16" alt="Add Lodgers"></img></a>'
 							}
 						}
-						
-						
+				}
+				<?php
 					}
+				?>
 				}
 			});
 

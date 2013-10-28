@@ -24,8 +24,8 @@ Good. You are using the correct browser.
 </html>-->
 </div>
 <div class="c3" id="footer">Boarding House Management System<br />
-Version 1.0 (Regular Show vs. Maria Mercedes)<br />
-Last Release: 27-OCT-2013</div>
+Version 1.1 (Regular Show vs. Honesto)<br />
+Last Release: 28-OCT-2013</div>
 </div>
 </body>
 </html>
