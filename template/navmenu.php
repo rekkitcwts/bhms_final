@@ -8,7 +8,6 @@
 <li class="lodger"><a href="#" class="brown">Lodger Management</a>
 <ul class="lodger-menu"><!-- Format: <a href="[base url]bhms_home/methodname">-->
 <li><a href="./addlodger.php" title="Add a new lodger">Add Lodger</a></li>
-<li><a href="./editlodgerprofile.php" title="Edit a lodger's profile">Edit Lodger Profile</a></li>
 <li><a href="./officiallodgers.php" title="Search and view the list of lodgers, whether official or unofficial.">Lodgers List</a></li>
 </ul>
 </li>

@@ -24,24 +24,12 @@ require_once('template/content-top.php');
       <option value="F">Female</option>
 	  <option value="M">Male</option>
 </select></td></tr>
-<tr><td>Total Bedspaces</td><td>
-<select name="maxspace">
-      <option value="1">1</option>
-	  <option value="2">2</option>
-	  <option value="3">3</option>
-	  <option value="4">4</option>
-	  <option value="5">5</option>
-	  <option value="6">6</option>
-	  <option value="7">7</option>
-	  <option value="8">8</option>
-</select>
-</td></tr>
 <tr><td>Room has CR?</td><td>
 <select name="hasCR">
       <option value="1">Yes</option>
 	  <option value="0">No</option>
 </select></td></tr>
-<tr><td>Room Rate</td><td>
+<tr><td>Room Rate and Number of Maximum Bedspaces</td><td>
 <?php
 mysql_connect('localhost', 'bhms', 'regularshow');
 mysql_select_db('bhms');
@@ -51,7 +39,7 @@ $result = mysql_query($sql);
 
 echo "<select name=\"bedspace_id\">";
 while ($row = mysql_fetch_array($result)) {
-    echo "<option value='" . $row['bedspace_id'] . "'>" . $row['monthlyrate'] . "</option>";
+    echo "<option value='" . $row['bedspace_id'] . "'>P" . $row['monthlyrate'] . ", " . $row['maxspace'] . " bedspace(s)</option>";
 }
 echo "</select>";
 mysql_close();

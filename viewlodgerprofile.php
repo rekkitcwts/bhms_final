@@ -16,6 +16,8 @@ $balresult = mysqli_query($dbc,$balquery);
 
 $query = "SELECT * from lodger WHERE ssn = '$ssn'";
 
+
+// Edit profile button here
 $result = mysqli_query($dbc,$query);
 if($result)
 {
@@ -48,6 +50,7 @@ if($result)
 			echo '<tr><td>Religious Affiliation</td><td>' . $row['affiliation'] . ' (' . $row['denomination'] . ')' .'</td></tr>';
 			echo '<tr><td>Contact Number</td><td>' . $row['contactnum'] .'</td></tr>';
 			echo '<tr><td>Balance</td><td>' . 'P' /*. $numbal*/ .'</td></tr>';
+			echo '<tr><td colspan=3><a href="./editlodgerprofile.php?ssn='.$ssn.'" title="Edit a lodger\'s profile">Edit Lodger Profile</a></td></tr>';
 		 }
 	echo '</table>';
 	}

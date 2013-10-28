@@ -16,10 +16,10 @@ try
 		$recordCount = $row['RecordCount'];
 		 
 		//Get records from database
-		$roomlistquery = "SELECT room_bedspace.rb_id, room.* , bedspace.*
-FROM room, bedspace, room_bedspace
-WHERE bedspace.bedspace_id = room_bedspace.bedspace_id
-AND room.roomcode = room_bedspace.roomcode ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";";
+		$roomlistquery = "SELECT room_bedspace.rb_id, room.roomcode, room.roomdesc, room.hasCR, room.roomtype, bedspace.maxspace, bedspace.monthlyrate
+FROM room
+INNER JOIN room_bedspace USING (roomcode)
+INNER JOIN bedspace USING (bedspace_id) ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";";
 		$result = mysql_query($roomlistquery);
 		
 		//Add all records to an array

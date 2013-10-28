@@ -4,7 +4,6 @@ include_once ('database_connection.php');
 $roomcode = $_POST['roomcode'];
 $roomtype = $_POST['roomtype'];
 // Get number of beds of this room...
-$numberbeds = $_POST['maxspace'];
 $hasCR = $_POST['hasCR'];
 $bedspace_id = $_POST['bedspace_id'];
 
@@ -14,6 +13,11 @@ if(empty($roomcode))
 }
 else
 {
+	$bedspaceResult = mysqli_query($dbc, "SELECT * FROM bedspace WHERE bedspace_id = '$bedspace_id'")
+			or die('Error querying database.');
+	$bsRow = mysqli_fetch_array($bedspaceResult,MYSQLI_ASSOC);
+	$numberbeds = $bsRow['maxspace'];
+	
 	$roomdesc = "";
 		
 		// ... then generate the description for it.
@@ -26,7 +30,7 @@ else
 			$roomdesc = 'Room for ' . $numberbeds . ' persons';
 		}
 		
-		$roomquery = "INSERT INTO room (roomcode, roomdesc, roomtype, maxspace, hasCR) VALUES ('$roomcode', '$roomdesc', '$roomtype', '$numberbeds', '$hasCR')";
+		$roomquery = "INSERT INTO room (roomcode, roomdesc, roomtype, hasCR) VALUES ('$roomcode', '$roomdesc', '$roomtype', '$hasCR')";
 		mysqli_query($dbc, $roomquery)
 			or die('Error querying database.');
 			
