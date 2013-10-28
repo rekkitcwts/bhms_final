@@ -1,3 +1,8 @@
+October 29, 2013
+v1.1 (Regular Show vs. Honesto)
+-Fixed the majority of the functions.
+-Informal background now changed to time-based background. Sweet!
+
 October 27, 2013
 v1.0 (Regular Show vs. Maria Mercedes)
 -Normalized the database.

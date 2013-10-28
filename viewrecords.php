@@ -16,30 +16,15 @@ require_once('template/content-top.php');
 				paging: true,
 				pageSize: 10,
 				sorting: true,
-				defaultSorting: 'payment.paymentdate ASC',
+				defaultSorting: 'lodger_payment.paymentDate ASC',
 				actions: {
 					listAction: 'offlodger-list-payment.php?action=list',
 				//	createAction: 'offlodger-list-payment.php?action=create',
 					updateAction: 'offlodger-list-payment.php?action=update',
 					deleteAction: 'offlodger-list-payment.php?action=delete'
 				},
-				toolbar: {
-					items: [{
-					icon: '/images/excel.png',
-					text: 'Export to Excel',
-					click: function () {
-						//perform your custom job...
-					}
-					},{
-					icon: '/images/pdf.png',
-					text: 'Export to Pdf',
-					click: function () {
-						//perform your custom job...
-					}
-					}]
-				},
 				fields: {
-					paymentid: {
+					lp_id: {
 						key: true,
 						create: false,
 						edit: false,
@@ -70,7 +55,7 @@ require_once('template/content-top.php');
 						create: false,
 						edit: false
 					},
-					paymentdate: {
+					paymentDate: {
 						title: 'Date',
 						width: '20%',
 						create: false,
@@ -82,7 +67,7 @@ require_once('template/content-top.php');
 						create: false,
 						edit: false
 					},
-					paymentamt: {
+					amountPaid: {
 						title: 'Amount',
 						width: '20%',
 						create: false	
@@ -102,6 +87,9 @@ require_once('template/content-top.php');
 		});
 
 	</script>
+    <br />
+    <br />
+    <br />
 <?php
 // footer
 require_once('template/footer.php');

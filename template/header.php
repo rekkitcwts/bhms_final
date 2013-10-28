@@ -32,6 +32,9 @@
 <!--<script src="./scripts/jtable/localization/jquery.jtable.tl.js" type="text/javascript"></script>-->
 
 <link rel="stylesheet" href="./styles/tf2fonts.css" type="text/css" />
+
+
+
 </head>
 <?php
   }

@@ -3,7 +3,8 @@
 outline : none;
 }
 body {
-background : url(../img/RS/background.png) #12ac5e;
+/*
+background : url(../img/RS/background.png) #12ac5e; */
 background-size : 100% 100%;
 background-repeat : no-repeat;
 background-attachment : fixed;
@@ -73,7 +74,6 @@ border-top : 1px solid #d3bb85;
 letter-spacing : 2px;
 text-align : left;
 padding : 2px 4px;
-background : #ec5e40;
 }
 .mytable tfoot th, .mytable_data tfoot th {
 text-align : right;

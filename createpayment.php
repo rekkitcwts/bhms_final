@@ -3,12 +3,19 @@ include_once ('database_connection.php');
 
 $type = $_GET['type'];
 $ssn = $_GET['ssn'];
-$totalrate = $_GET['totalrate'];
-$paymentamt = $_GET['paymentamt'];
+$bedspace_id = $_GET['bedspace_id'];
+$ar_id = $_GET['ar_id'];
+$amountPaid = $_GET['amountPaid'];
 
-$insertPayment = "INSERT INTO payment(lodger_ssn, paymenttype, paymentdate, totalrate, paymentamt) VALUES ('$ssn','$type',NOW(),'$totalrate','$paymentamt')";
+$insertPayment = "INSERT INTO payment(paymenttype, amountPaid, paymentDate) VALUES ('$type','$amountPaid',NOW())";
 mysqli_query($dbc, $insertPayment)
-	or die('Error querying database.');
+	or die('Error querying database. Check the insert into payment query.');
+	
+$payment_id = mysqli_insert_id($dbc);
+
+$insertPayment = "INSERT INTO lodger_payment(ssn, payment_id, bedspace_id, ar_id) VALUES ('$ssn','$payment_id','$bedspace_id','$ar_id')";
+mysqli_query($dbc, $insertPayment)
+	or die('Error querying database. SOOOOOOOOREEEEEEEEEEEE POOOOOOOOOOOOOOO.');
 			
 	echo 'Payment recorded.<br>';
 	echo 'Redirecting to records list. Please wait.';

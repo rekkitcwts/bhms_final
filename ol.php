@@ -14,7 +14,7 @@ try
 		
 
 		//Get records from database. Clean Line 17.
-		$result = mysql_query("SELECT occupy_room.official_rec_id, lodger.lname, lodger.fname, lodger.mname, lodger.ssn, occupy_room.applianceRate, room_bedspace.rb_id, room_bedspace.roomcode, bedspace.monthlyrate, occupy_room.applianceRate + bedspace.monthlyrate AS total FROM lodger INNER JOIN occupy_room ON occupy_room.ssn = lodger.ssn INNER JOIN room_bedspace ON room_bedspace.rb_id = occupy_room.rb_id INNER JOIN bedspace ON bedspace.bedspace_id = room_bedspace.bedspace_id WHERE lodger.lname LIKE '%" . $_POST['lname']. "%' ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
+		$result = mysql_query("SELECT occupy_room.official_rec_id, lodger.lname, lodger.fname, lodger.mname, lodger.ssn, appliancerate.appliancerate, room_bedspace.rb_id, room_bedspace.roomcode, bedspace.monthlyrate, appliancerate.appliancerate + bedspace.monthlyrate AS total FROM lodger INNER JOIN occupy_room ON occupy_room.ssn = lodger.ssn INNER JOIN room_bedspace ON room_bedspace.rb_id = occupy_room.rb_id INNER JOIN bedspace ON bedspace.bedspace_id = room_bedspace.bedspace_id INNER JOIN appliancerate USING (ar_id) ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
 		
 		//Add all records to an array
 		$rows = array();
@@ -61,7 +61,7 @@ try
 	else if($_GET["action"] == "delete")
 	{
 		//Delete from database
-		$result = mysql_query("DELETE FROM official WHERE lodger_ssn = " . $_POST["ssn"] . ";");
+		$result = mysql_query("DELETE FROM occupy_room WHERE official_rec_id = " . $_POST["official_rec_id"] . ";");
 
 		//Return result to jTable
 		$jTableResult = array();

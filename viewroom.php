@@ -32,7 +32,7 @@ $resResult = mysqli_query($dbc, $reslodgersQuery);
 if($roomResult){
 	
 	echo '<table border="0" cellpadding="0" cellspacing="0" class="mytable boxshadow">';
-	echo '<tr bgcolor="#66cc44"><th>Details</th><th></th></tr>';
+	echo '<tr bgcolor="#5994ce"><th>Details</th><th></th></tr>';
          while($room = mysqli_fetch_array($roomResult,MYSQLI_ASSOC))
 		 {
 			echo '<tr><td>Room Code</td><td>' . $room['roomcode'] .'</td></tr>';
@@ -66,7 +66,7 @@ echo '<br>';
 if($occResult)
 {
 	echo '<table border="0" cellpadding="0" cellspacing="0" class="mytable boxshadow">';
-	echo '<tr bgcolor="#66cc44"><th>Occupants</th></tr>';
+	echo '<tr bgcolor="#a98969"><th>Occupants</th></tr>';
 	$occMSAR = mysqli_num_rows($occResult);
 	if($occMSAR != 0){
 		while($occs = mysqli_fetch_array($occResult,MYSQLI_ASSOC))
@@ -90,7 +90,7 @@ echo '<br>';
 if($resResult)
 {
 	echo '<table border="0" cellpadding="0" cellspacing="0" class="mytable boxshadow">';
-	echo '<tr bgcolor="#66cc44"><th>Reserved Lodgers</th><th>Date of Deadline</th></tr>';
+	echo '<tr bgcolor="#5994ce"><th>Reserved Lodgers</th><th>Date of Deadline</th></tr>';
 	$resMSAR = mysqli_affected_rows($dbc);
 	if($resMSAR!=0){
 		while($res = mysqli_fetch_array($resResult,MYSQLI_ASSOC))

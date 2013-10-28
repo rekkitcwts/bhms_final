@@ -45,8 +45,7 @@ require_once('template/content-top.php');
 				actions: {
 					listAction: 'ol.php?action=list',
 					updateAction: 'ol.php?action=update',
-					deleteAction: 'ol.php?action=delete',
-					viewAction: 'viewlodgerprofile.php'
+					deleteAction: 'ol.php?action=delete'
 				},
 				fields: {
 					official_rec_id: {
@@ -79,7 +78,7 @@ require_once('template/content-top.php');
 						create: false,
 						edit: false
 					},
-					applianceRate: {
+					appliancerate: {
 						title: 'Appliance Rate',
 						width: '25%'
 					},
