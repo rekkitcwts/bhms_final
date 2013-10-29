@@ -10,7 +10,7 @@ $ssn = $_GET['ssn'];
 $type = $_GET['type'];
 
 //$balquery = "SELECT SUM(totalrate - paymentamt) as totalbalance FROM payment WHERE lodger_ssn = '$ssn'";
-$balquery = "SELECT lodger_payment.lp_id, lodger.lname, lodger.fname, lodger.mname, payment.paymenttype, payment.amountPaid, payment.paymentDate, bedspace.monthlyrate, appliancerate.appliancerate, bedspace.monthlyrate + appliancerate.appliancerate AS totalrate, bedspace.monthlyrate + appliancerate.appliancerate - payment.amountPaid AS balance FROM lodger INNER JOIN lodger_payment USING (ssn) INNER JOIN payment USING (payment_id) INNER JOIN bedspace USING (bedspace_id) INNER JOIN appliancerate USING (ar_id) WHERE lodger.ssn = '$ssn'";
+$balquery = "SELECT lodger_payment.lp_id, lodger.lname, lodger.fname, lodger.mname, payment.paymenttype, payment.amountPaid, payment.paymentDate, bedspace.monthlyrate, appliancerate.appliancerate, bedspace.monthlyrate + appliancerate.appliancerate AS totalrate, SUM(bedspace.monthlyrate + appliancerate.appliancerate - payment.amountPaid) AS balance FROM lodger INNER JOIN lodger_payment USING (ssn) INNER JOIN payment USING (payment_id) INNER JOIN bedspace USING (bedspace_id) INNER JOIN appliancerate USING (ar_id) WHERE lodger.ssn = '$ssn'";
 $balresult = mysqli_query($dbc,$balquery);
 $balrow = mysqli_fetch_array($balresult,MYSQLI_ASSOC);
 $numbal = $balrow['balance'];
@@ -53,7 +53,11 @@ if($result)
 			echo '<tr><td>Date of Birth</td><td>' . $row['birthdate'] .'</td></tr>';
 			echo '<tr><td>Start of Stay</td><td>' . $row['startStay'] .'</td></tr>';
 			echo '<tr><td>Home Address</td><td>' . $row['purok'] . ', ' . $row['barangay'] . ', ' . $row['city'] . ', ' . $row['province'] . '</td></tr>';
-			echo '<tr><td>Religious Affiliation</td><td>' . $row['affiliation'] . ' (' . $row['denomination'] . ')' .'</td></tr>';
+			echo '<tr><td>Religious Affiliation</td><td>' . $row['affiliation']; 
+			if ($row['denomination'])
+				echo ' (' . $row['denomination'] . ')'; 
+				
+			echo '</td></tr>';
 			echo '<tr><td>Contact Number</td><td>' . $row['contactnum'] .'</td></tr>';
 			echo '<tr><td>Balance</td><td>' . 'P';
 			if (!$numbal)

@@ -6,8 +6,7 @@ require_once('template/content-top.php');
 ?>
 <div class="filtering">
     <form>
-<select name="year" >
-    <option value="0000">Year</option>
+<select name="recyear" >
 <?php
 for($i=date('Y'); $i>2012; $i--) {
     echo '<option value="'.$i.'"'.'>'.$i.'</option>'."\n";
@@ -15,8 +14,7 @@ for($i=date('Y'); $i>2012; $i--) {
 ?>
 
 </select>
-<select name="month">
-<option value="0">Month</option>
+<select name="recmonth">
 <option value="1">January</option>
 <option value="2">February</option>
 <option value="3">March</option>
@@ -51,7 +49,7 @@ for($i=date('Y'); $i>2012; $i--) {
 				},
 				
 				fields: {
-					paymentid: {
+					lp_id: {
 						key: true,
 						create: false,
 						edit: false,
@@ -82,7 +80,7 @@ for($i=date('Y'); $i>2012; $i--) {
 						create: false,
 						edit: false
 					},
-					paymentdate: {
+					paymentDate: {
 						title: 'Date',
 						width: '20%',
 						create: false,
@@ -94,7 +92,7 @@ for($i=date('Y'); $i>2012; $i--) {
 						create: false,
 						edit: false
 					},
-					paymentamt: {
+					amountPaid: {
 						title: 'Amount',
 						width: '20%',
 						create: false	
@@ -116,8 +114,8 @@ for($i=date('Y'); $i>2012; $i--) {
         $('#LoadRecordsButton').click(function (e) {
             e.preventDefault();
             $('#PeopleTableContainer').jtable('load', {
-				year: $('#year selected').val(),
-                month: $('#month selected').val()
+				year: $('#recyear option:selected').val(),
+                month: $('#recmonth option:selected').val()
             });
         }); 
 		
@@ -134,7 +132,7 @@ for($i=date('Y'); $i>2012; $i--) {
         }); */
  
         //Load all records when page is first shown
-       // $('#LoadRecordsButton').click();
+       $('#LoadRecordsButton').click();
 
 		});
 

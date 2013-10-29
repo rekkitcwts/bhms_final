@@ -2,32 +2,22 @@
 include_once ('database_connection.php');
 try
 {
-	$con = mysql_connect("localhost","kureido","tnx4standinstillwanker");
-	mysql_select_db("kureido", $con);
+	$con = mysql_connect("localhost","bhms","regularshow");
+	mysql_select_db("bhms", $con);
 	//Getting records (listAction)
 	if($_GET["action"] == "list")
 	{
 		//Get record count
-		$offresult = mysql_query("SELECT COUNT(*) AS OLRecordCount FROM official;");
+		$offresult = mysql_query("SELECT COUNT(*) AS OLRecordCount FROM occupy_room;");
 		$offrow = mysql_fetch_array($offresult);
 		$allresult = mysql_query("SELECT COUNT(*) AS AllRecordCount FROM lodger;");
 		$allrow = mysql_fetch_array($allresult);
 		$resresult = mysql_query("SELECT COUNT(*) AS ResRecordCount FROM reservation;");
 		$resrow = mysql_fetch_array($resresult);
 		$recordCount = $allrow['AllRecordCount'] - $offrow['OLRecordCount'] - $resrow['ResRecordCount'];
-
-		$year = "";
-		$month = "";
-		if (empty($_POST['year']) && empty($_POST['month']))
-			$year = $month = "";
-		else
-		{
-			$year = $_POST['year'];
-			$month = $_POST['month'];
-		}
 		
 		//Get records from database
-		$result = mysql_query("SELECT payment.paymentid, lodger.ssn, lodger.lname, lodger.fname, lodger.mname, payment.paymenttype, payment.paymentdate, payment.totalrate, payment.paymentamt, payment.totalrate - payment.paymentamt AS balance FROM payment, lodger WHERE lodger.ssn = payment.lodger_ssn AND YEAR(paymentdate) = '" . $_POST['year'] . "' AND MONTH(paymentdate) = '" . $_POST['month'] . "' ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
+		$result = mysql_query("SELECT lodger_payment.lp_id, lodger.lname, lodger.fname, lodger.mname, payment.paymenttype, payment.amountPaid, payment.paymentDate, bedspace.monthlyrate, appliancerate.appliancerate, MONTH(bedspace.monthlyrate) AS recmonth, YEAR(bedspace.monthlyrate) AS recyear FROM lodger INNER JOIN lodger_payment USING (ssn) INNER JOIN payment USING (payment_id) INNER JOIN bedspace USING (bedspace_id) INNER JOIN appliancerate USING (ar_id) WHERE YEAR(payment.paymentDate) = '" . $_POST["recyear"] . "' AND MONTH(payment.paymentdate) = '" . $_POST["recmonth"] . "' ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
 		
 		//Add all records to an array
 		$rows = array();

@@ -31,7 +31,7 @@ if (17 <= currentTime && currentTime < 20) {
         document.body.background = "./img/timebased/sundown.jpg";
     }
 }
-else {
+if (20 <= currentTime || currentTime < 5) {
 	// Night
     if (document.body) {
         document.body.background = "./img/timebased/night.jpg";

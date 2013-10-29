@@ -14,7 +14,7 @@ try
 		
 
 		//Get records from database. Clean Line 17.
-		$result = mysql_query("SELECT occupy_room.official_rec_id, lodger.lname, lodger.fname, lodger.mname, lodger.ssn, appliancerate.appliancerate, room_bedspace.rb_id, room_bedspace.roomcode, bedspace.monthlyrate, appliancerate.appliancerate + bedspace.monthlyrate AS total FROM lodger INNER JOIN occupy_room ON occupy_room.ssn = lodger.ssn INNER JOIN room_bedspace ON room_bedspace.rb_id = occupy_room.rb_id INNER JOIN bedspace ON bedspace.bedspace_id = room_bedspace.bedspace_id INNER JOIN appliancerate USING (ar_id) ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
+		$result = mysql_query("SELECT occupy_room.official_rec_id, lodger.lname, lodger.fname, lodger.mname, lodger.ssn, appliancerate.appliancerate, room_bedspace.rb_id, room_bedspace.roomcode, bedspace.monthlyrate, appliancerate.appliancerate + bedspace.monthlyrate AS total FROM lodger INNER JOIN occupy_room ON occupy_room.ssn = lodger.ssn INNER JOIN room_bedspace ON room_bedspace.rb_id = occupy_room.rb_id INNER JOIN bedspace ON bedspace.bedspace_id = room_bedspace.bedspace_id INNER JOIN appliancerate USING (ar_id) WHERE " . $_POST["criteria"] . " LIKE '%" . $_POST["name"] . "%' ORDER BY " . $_GET["jtSorting"] . " LIMIT " . $_GET["jtStartIndex"] . "," . $_GET["jtPageSize"] .";");
 		
 		//Add all records to an array
 		$rows = array();

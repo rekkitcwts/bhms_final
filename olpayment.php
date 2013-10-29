@@ -5,16 +5,16 @@ require_once('template/navmenu.php');
 require_once('template/content-top.php');
 ?>
 <script type="text/javascript" src="./scripts/livesearch/payment.js"></script>
-<!--Criteria: <select name="searchtype" id="searchtype">
-	<option value="Last">Last Name</option>
-	<option value="First">First Name</option>
-	</select> 
-	<br>
-	Search:<INPUT type ="Text" placeholder="Search" value ="" name ="nametosearch" id="faq_search_input" autocomplete="off">
-	<br>
-	<br>
-	<br>
-	<div id="searchresultdata" class="faq-articles"> </div>-->
+<form>
+        Name: <input type="text" name="name" id="name" />
+        Search Criteria: 
+        <select id="criteria" name="criteria">
+            <option selected="selected" value="lodger.lname">Last Name</option>
+            <option value="lodger.fname">First Name</option>
+            <option value="lodger.room_code">Room</option>
+        </select>
+        <button type="submit" id="LoadRecordsButton">Load records</button>
+    </form>
 	<div id="OLtable" style="width: 750px;"></div>
 	<script type="text/javascript">
 
@@ -111,7 +111,18 @@ require_once('template/content-top.php');
 			});
 
 			//Load person list from server
-			$('#OLtable').jtable('load');
+			//$('#OLtable').jtable('load');
+			 //Re-load records when user click 'load records' button.
+        $('#LoadRecordsButton').click(function (e) {
+            e.preventDefault();
+            $('#OLtable').jtable('load', {
+                name: $('#name').val(),
+                criteria: $('#criteria option:selected').val()
+            });
+        });
+ 
+        //Load all records when page is first shown
+        $('#LoadRecordsButton').click();
 
 			
 		});
